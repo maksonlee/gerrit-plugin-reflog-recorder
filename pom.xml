@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.maksonlee.gerrit</groupId>
+    <artifactId>reflog-recorder</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>reflog-recorder</name>
+
+    <properties>
+        <Gerrit-ApiType>plugin</Gerrit-ApiType>
+        <Gerrit-ApiVersion>3.12.0-rc5</Gerrit-ApiVersion>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gerrit</groupId>
+            <artifactId>gerrit-plugin-api</artifactId>
+            <version>${Gerrit-ApiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Gerrit-PluginName>reflog-recorder</Gerrit-PluginName>
+                            <Gerrit-Module>com.maksonlee.gerrit.reflog.api.Module</Gerrit-Module>
+                            <Gerrit-SshModule>com.maksonlee.gerrit.reflog.ssh.SshModule</Gerrit-SshModule>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Gerrit-ApiType>${Gerrit-ApiType}</Gerrit-ApiType>
+                            <Gerrit-ApiVersion>${Gerrit-ApiVersion}</Gerrit-ApiVersion>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
